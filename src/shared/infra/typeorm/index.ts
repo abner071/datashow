@@ -12,7 +12,7 @@ const dataSource = new DataSource({
   password: 'datashowpass',
   database,
   migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
-  // entities: ['./src/modules/**/entities/*.ts'],
+  entities: ['./src/modules/**/entities/*.ts'],
 });
 
 async function createConnection(showSuccessLog = true) {

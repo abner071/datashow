@@ -1,21 +1,10 @@
 import { Router } from "express";
+import { CreateChurchController } from "../../../../modules/church/useCases/CreateChurch/CreateChurchController";
 
 const churchRoutes = Router();
 
-churchRoutes.post('/', (request, response) => {
-  const {
-    name,
-    address,
-    address_number,
-    district,
-    city,
-    state,
-    logo
-  } = request.body;
-});
+const createChurchController = new CreateChurchController();
 
-churchRoutes.get('/', (request, response) => {
-  return response.send('teste')
-})
+churchRoutes.post('/', createChurchController.handle);
 
 export { churchRoutes };

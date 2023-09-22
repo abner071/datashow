@@ -40,7 +40,8 @@ export class CreateChurch1695170237833 implements MigrationInterface {
                         {
                             name: "state",
                             type: "varchar",
-                            isNullable: true
+                            isNullable: true,
+                            length: "2"
                         },
                         {
                             name: "logo",
@@ -51,6 +52,11 @@ export class CreateChurch1695170237833 implements MigrationInterface {
                           name: 'created_at',
                           type: 'timestamp',
                           default: 'now()',
+                        },
+                        {
+                          name: 'updated_at',
+                          type: 'timestamp',
+                          isNullable: true
                         }
                     ]
                 }
