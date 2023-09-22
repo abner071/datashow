@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { ICreateChurchDTO } from "@modules/church/dtos/ICreateChurchDTO";
 import { IChurchRepository } from "@modules/church/repositories/IChurchRepository";
+import { AppError } from "@shared/errors/AppError";
 
 @injectable()
 class CreateChurchUseCase {
@@ -21,7 +22,7 @@ class CreateChurchUseCase {
     const churchAlreadyExists = await this.churchRepository.findByName(name);
 
     if (churchAlreadyExists) {
-      throw new Error("Church already exists!");
+      throw new AppError("Church already exists!");
     }
 
     await this.churchRepository.create({
