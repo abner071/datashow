@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import express from "express";
-import 'express-async-errors';
+import "express-async-errors";
 import { router } from "./routes";
 import { createConnection } from "../typeorm";
-import "../../container";
+import "@shared/container";
 
 createConnection();
 const app = express();

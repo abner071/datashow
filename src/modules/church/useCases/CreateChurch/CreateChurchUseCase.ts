@@ -1,12 +1,12 @@
 import { inject, injectable } from "tsyringe";
-import { ICreateChurchDTO } from "../../dtos/ICreateChurchDTO";
-import { IChurchRepository } from "../../repositories/IChurchRepository";
+import { ICreateChurchDTO } from "@modules/church/dtos/ICreateChurchDTO";
+import { IChurchRepository } from "@modules/church/repositories/IChurchRepository";
 
 @injectable()
 class CreateChurchUseCase {
   constructor(
-    @inject('ChurchRepository')
-    private churchRepository: IChurchRepository
+    @inject("ChurchRepository")
+    private churchRepository: IChurchRepository,
   ) {}
 
   async execute({
@@ -16,12 +16,12 @@ class CreateChurchUseCase {
     district,
     city,
     state,
-    logo
+    logo,
   }: ICreateChurchDTO): Promise<void> {
     const churchAlreadyExists = await this.churchRepository.findByName(name);
 
     if (churchAlreadyExists) {
-      throw new Error('Church already exists!');
+      throw new Error("Church already exists!");
     }
 
     await this.churchRepository.create({
@@ -31,8 +31,8 @@ class CreateChurchUseCase {
       district,
       city,
       state,
-      logo
-    })
+      logo,
+    });
   }
 }
 

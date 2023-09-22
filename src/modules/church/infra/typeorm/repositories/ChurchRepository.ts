@@ -1,9 +1,8 @@
 import { Repository } from "typeorm";
-import { ICreateChurchDTO } from "../../../dtos/ICreateChurchDTO";
-import { IChurchRepository } from "../../../repositories/IChurchRepository";
+import { ICreateChurchDTO } from "@modules/church/dtos/ICreateChurchDTO";
+import { IChurchRepository } from "@modules/church/repositories/IChurchRepository";
+import { dataSource } from "@shared/infra/typeorm";
 import { Church } from "../entities/Church";
-import { dataSource } from "../../../../../shared/infra/typeorm";
-
 
 class ChurchRepository implements IChurchRepository {
   private repository: Repository<Church>;
@@ -35,15 +34,15 @@ class ChurchRepository implements IChurchRepository {
 
     await this.repository.save(church);
   }
-  
+
   async findById(id: string): Promise<Church> {
-    const church = this.repository.findOne({ where : { id } });
+    const church = this.repository.findOne({ where: { id } });
 
     return church;
   }
 
   async findByName(name: string): Promise<Church> {
-    const church = this.repository.findOne({ where : { name } });
+    const church = this.repository.findOne({ where: { name } });
 
     return church;
   }

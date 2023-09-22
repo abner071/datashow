@@ -1,5 +1,5 @@
-import { ICreateChurchDTO } from "../dtos/ICreateChurchDTO";
-import { Church } from "../infra/typeorm/entities/Church";
+import { ICreateChurchDTO } from "@modules/church/dtos/ICreateChurchDTO";
+import { Church } from "@modules/church/infra/typeorm/entities/Church";
 
 interface IChurchRepository {
   create(data: ICreateChurchDTO): Promise<void>;

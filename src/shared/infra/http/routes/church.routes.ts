@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { CreateChurchController } from "../../../../modules/church/useCases/CreateChurch/CreateChurchController";
+import { CreateChurchController } from "@modules/church/useCases/CreateChurch/CreateChurchController";
 
 const churchRoutes = Router();
 
 const createChurchController = new CreateChurchController();
 
-churchRoutes.post('/', createChurchController.handle);
+churchRoutes.post("/", createChurchController.handle);
 
 export { churchRoutes };
