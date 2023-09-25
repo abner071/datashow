@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { ILike, Repository } from "typeorm";
 import { ICreateChurchDTO } from "@modules/church/dtos/ICreateChurchDTO";
 import { IChurchRepository } from "@modules/church/repositories/IChurchRepository";
 import { dataSource } from "@shared/infra/typeorm";
@@ -20,6 +20,7 @@ class ChurchRepository implements IChurchRepository {
     district,
     state,
     logo,
+    updated_at,
   }: ICreateChurchDTO): Promise<void> {
     const church = this.repository.create({
       id,
@@ -30,21 +31,34 @@ class ChurchRepository implements IChurchRepository {
       district,
       state,
       logo,
+      updated_at,
     });
 
     await this.repository.save(church);
   }
 
   async findById(id: string): Promise<Church> {
-    const church = this.repository.findOne({ where: { id } });
+    const church = await this.repository.findOne({ where: { id } });
 
     return church;
   }
 
   async findByName(name: string): Promise<Church> {
-    const church = this.repository.findOne({ where: { name } });
+    const church = await this.repository.findOne({ where: { name } });
 
     return church;
+  }
+
+  async list({ name }: { name?: string }): Promise<Church[]> {
+    const where = {};
+
+    if (name) {
+      where["name"] = ILike(`%${name}%`);
+    }
+
+    const churchs = await this.repository.findBy(where);
+
+    return churchs;
   }
 }
 

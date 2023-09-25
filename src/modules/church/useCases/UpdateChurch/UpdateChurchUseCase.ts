@@ -42,6 +42,7 @@ class UpdateChurchUseCase {
       city,
       state,
       logo,
+      updated_at: new Date(),
     });
   }
 }

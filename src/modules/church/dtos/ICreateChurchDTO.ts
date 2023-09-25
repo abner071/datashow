@@ -7,6 +7,7 @@ interface ICreateChurchDTO {
   city?: string;
   state?: string;
   logo?: string;
+  updated_at?: Date;
 }
 
 export { ICreateChurchDTO };
