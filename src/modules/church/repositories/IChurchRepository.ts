@@ -10,6 +10,7 @@ interface IChurchRepository {
   findById(id: string): Promise<Church>;
   findByName(name: string): Promise<Church>;
   list({ name }: IListChurchs): Promise<Church[]>;
+  delete(id: string): Promise<void>;
 }
 
 export { IChurchRepository };

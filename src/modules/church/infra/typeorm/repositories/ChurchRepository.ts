@@ -60,6 +60,10 @@ class ChurchRepository implements IChurchRepository {
 
     return churchs;
   }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
 }
 
 export { ChurchRepository };

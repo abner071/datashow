@@ -24,11 +24,10 @@ class UpdateChurchUseCase {
     const church = await this.churchRepository.findById(id);
 
     if (!church) {
-      throw new AppError("Church is not exists!");
+      throw new AppError("Church does not exists!");
     }
 
     const oldLogo = `./tmp/church/${church.logo}`;
-
     if (fileExists(oldLogo)) {
       await deleteFile(oldLogo);
     }
