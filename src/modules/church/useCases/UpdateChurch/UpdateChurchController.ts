@@ -1,17 +1,18 @@
 import { Request, Response } from "express";
+import { UpdateChurchUseCase } from "./UpdateChurchUseCase";
 import { container } from "tsyringe";
-import { CreateChurchUseCase } from "./CreateChurchUseCase";
 
-class CreateChurchController {
+class UpdateChurchController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, address, address_number, city, district, state } =
       request.body;
-
+    const { id } = request.params;
     const logo = request.file?.filename;
 
-    const createChurchUseCase = container.resolve(CreateChurchUseCase);
+    const updateChurchUseCase = container.resolve(UpdateChurchUseCase);
 
-    await createChurchUseCase.execute({
+    await updateChurchUseCase.execute({
+      id,
       name,
       address,
       address_number,
@@ -21,8 +22,8 @@ class CreateChurchController {
       logo,
     });
 
-    return response.status(201).send();
+    return response.status(200).send();
   }
 }
 
-export { CreateChurchController };
+export { UpdateChurchController };
