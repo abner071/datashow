@@ -6,7 +6,7 @@ interface ICreateUserDTO {
   password: string;
   contact: string;
   avatar?: string;
-  updated_at?: string;
+  updated_at?: Date;
 }
 
 export { ICreateUserDTO };
