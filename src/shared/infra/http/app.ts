@@ -10,9 +10,8 @@ createConnection();
 const app = express();
 
 app.use(express.json());
-
+app.use(express.urlencoded());
 app.use(router);
-
 app.use(ErrorResponse);
 
 export { app };

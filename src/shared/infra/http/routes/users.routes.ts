@@ -4,11 +4,13 @@ import uploadConfig from "@config/upload";
 
 import { CreateUserController } from "@modules/users/useCases/CreateUser/CreateUserController";
 import { UpdateUserController } from "@modules/users/useCases/UpdateUser/UpdateUserController";
+import { UpdatePasswordUserController } from "@modules/users/useCases/UpdatePasswordUser/UpdatePasswordUserController";
 
 const usersRoutes = Router();
 
 const createUserController = new CreateUserController();
 const updateUserController = new UpdateUserController();
+const updatePasswordUserController = new UpdatePasswordUserController();
 
 const uploadAvatar = multer(uploadConfig.upload("./tmp/users"));
 
@@ -23,5 +25,7 @@ usersRoutes.put(
   uploadAvatar.single("avatar"),
   updateUserController.handle,
 );
+
+usersRoutes.patch("/password/:id", updatePasswordUserController.handle);
 
 export { usersRoutes };
