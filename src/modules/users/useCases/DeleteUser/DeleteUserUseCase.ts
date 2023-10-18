@@ -1,30 +1,29 @@
 import { inject, injectable } from "tsyringe";
 import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { AppError } from "@shared/errors/AppError";
-
-interface IRequest {
-  id: string;
-  password: string;
-}
+import { deleteFile, fileExists } from "@utils/file";
 
 @injectable()
-class UpdatePasswordUserUseCase {
+class DeleteUserUseCase {
   constructor(
     @inject("UsersRepository")
     private usersRepository: IUsersRepository,
   ) {}
 
-  async execute({ id, password }: IRequest): Promise<void> {
+  async execute(id: string): Promise<void> {
     const user = await this.usersRepository.findById(id);
 
     if (!user) {
       throw new AppError("Usuário não existe!");
     }
 
-    user.password = password;
+    const avatar = `./tmp/users/${user.avatar}`;
+    if (fileExists(avatar)) {
+      await deleteFile(avatar);
+    }
 
-    await this.usersRepository.create(user);
+    await this.usersRepository.delete(id);
   }
 }
 
-export { UpdatePasswordUserUseCase };
+export { DeleteUserUseCase };

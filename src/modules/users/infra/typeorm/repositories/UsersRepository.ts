@@ -51,9 +51,15 @@ class UsersRepository implements IUsersRepository {
     return await this.repository.findOne({ where: { email } });
   }
 
-  async list({ name, email }: IListUsers): Promise<User[]> {
+  async list({ id, church_id, name, email }: IListUsers): Promise<User[]> {
     const where = {};
 
+    if (id) {
+      where["id"] = id;
+    }
+    if (church_id) {
+      where["church_id"] = church_id;
+    }
     if (name) {
       where["name"] = ILike(`%${name}%`);
     }

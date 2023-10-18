@@ -3,6 +3,7 @@ import { ICreateUserDTO } from "../dtos/ICreateUserDTO";
 
 interface IListUsers {
   id?: string;
+  church_id?: string;
   name?: string;
   email?: string;
 }
